@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Precio de Bitcoin{% endblock %}
+
+{% block content %}
+    <h1>Precio de Bitcoin en los últimos 7 días</h1>
+
+    <!-- Formulario para seleccionar rango de fechas y moneda -->
+    <form id="bitcoin-price-form" method="get">
+        <label for="days">Días:</label>
+        <input type="number" id="days" name="days" min="1" max="365" value="{{ days }}">
+        
+        <label for="currency">Moneda:</label>
+        <select name="currency" id="currency">
+            <option value="usd" {% if currency == 'USD' %}selected{% endif %}>USD</option>
+            <option value="clp" {% if currency == 'CLP' %}selected{% endif %}>CLP</option>
+        </select>
+        <button type="button" id="update-bitcoin-price">Actualizar Precios</button>
+    </form>
+
+    <!-- Visualización del gráfico de precios -->
+    <div>{{ plot_div|safe }}</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('update-bitcoin-price').addEventListener('click', function() {
+                var days = document.getElementById('days').value;
+                var currency = document.getElementById('currency').value;
+                window.location.href = `/bitcoin-chart/?days=${days}&currency=${currency}`;
+            });
+        });
+    </script>
+{% endblock %}

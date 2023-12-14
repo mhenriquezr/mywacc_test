@@ -1,0 +1,37 @@
+<!-- mywacc_test/cryptodata/templates/cryptodata/bitcoin_market_data_chart.html -->
+{% extends "base.html" %}
+
+{% block title %}Datos de Mercado de Bitcoin{% endblock %}
+
+{% block content %}
+    <!-- Formulario para seleccionar rango de fechas y moneda -->
+    <form id="market-data-form" action="{% url 'bitcoin_market_data_chart' %}" method="get">
+        <label for="days">Días:</label>
+        <input type="number" id="days" name="days" min="1" max="365" value="{{ days }}">
+        
+        <label for="currency">Moneda:</label>
+        <select name="currency" id="currency">
+            <option value="usd" {% if currency == 'USD' %}selected{% endif %}>USD</option>
+            <option value="clp" {% if currency == 'CLP' %}selected{% endif %}>CLP</option>
+        </select>
+        <button type="button" id="update-market-data">Actualizar Datos de Mercado</button>
+    </form>
+
+    <h2>Capitalización de Mercado de Bitcoin</h2>
+    <div>{{ market_cap_plot_div|safe }}</div>
+    <h2>Volumen Total de Bitcoin</h2>
+    <div>{{ volume_plot_div|safe }}</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('update-market-data').addEventListener('click', function() {
+                var days = document.getElementById('days').value;
+                var currency = document.getElementById('currency').value;
+        
+                // Redirigir a la URL con los parámetros correspondientes
+                window.location.href = `/bitcoin-market-data-chart/?days=${days}&currency=${currency}`;
+            });
+        });
+    </script>
+    
+{% endblock %}
