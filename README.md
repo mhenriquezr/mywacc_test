@@ -40,6 +40,10 @@ Una vez que la aplicación esté en ejecución, puedes acceder a ella a través 
 
   
 ## URLs
+
+Instancia de Azure : https://mywacc.azurewebsites.net/
+Instancia Local : http://localhost:8000
+
 - `/cryptodata/`: URL principal de la aplicación MyWacc Cryptodata.
 - `/bitcoin-chart/`: URL para ver gráficos interactivos de precios de Bitcoin.
 - `/bitcoin-market-data-chart/`: URL para ver gráficos de datos de mercado de Bitcoin.
